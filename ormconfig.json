@@ -1,0 +1,10 @@
+{
+  "type": "sqlite",
+  "database": "data/poc.db",
+  "logging": true,
+  "entities": ["src/models/*.entity{.js,.ts}"],
+  "migrations": ["src/database/migrations/*.ts"],
+  "cli": {
+    "migrationsDir": "src/database/migrations"
+  }
+}
