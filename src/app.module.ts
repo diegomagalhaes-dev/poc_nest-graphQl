@@ -5,6 +5,10 @@ import { AppService } from './app.service';
 import { AppController } from './app.controller';
 
 import { RepoModule } from './repo.module';
+import UserResolver from './resolvers/user.resolver';
+import { GraphQLModule } from '@nestjs/graphql';
+
+const gqlImports = [UserResolver];
 
 @Module({
   imports: [
@@ -20,6 +24,11 @@ import { RepoModule } from './repo.module';
       logging: true,
     }),
     RepoModule,
+    ...gqlImports,
+    GraphQLModule.forRoot({
+      autoSchemaFile: 'schema.gql',
+      playground: true,
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
