@@ -23,6 +23,10 @@ export default class Message {
   userId: number;
 
   @Field()
+  @Column()
+  content: string;
+
+  @Field()
   @CreateDateColumn({ name: 'created_at' })
   createAt: Date;
 
