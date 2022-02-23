@@ -3,12 +3,14 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
 import { RepoModule } from './repo.module';
 import UserResolver from './resolvers/user.resolver';
 import { GraphQLModule } from '@nestjs/graphql';
+import MessageResolver from './resolvers/message.resolver';
 
-const gqlImports = [UserResolver];
+const gqlImports = [UserResolver, MessageResolver];
 
 @Module({
   imports: [
@@ -25,7 +27,8 @@ const gqlImports = [UserResolver];
     }),
     RepoModule,
     ...gqlImports,
-    GraphQLModule.forRoot({
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
       autoSchemaFile: 'schema.gql',
       playground: true,
     }),
